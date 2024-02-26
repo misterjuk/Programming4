@@ -8,10 +8,13 @@
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "Renderer.h"
+#include "GameTime.h"
 #include "ResourceManager.h"
+
 
 #include <chrono>
 #include <thread>
+
 
 SDL_Window* g_window{};
 
@@ -80,35 +83,47 @@ dae::Minigin::~Minigin()
 
 void dae::Minigin::Run(const std::function<void()>& load)
 {
+
 	load();
 
-	auto& renderer = Renderer::GetInstance();
-	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
+	GameTime::GetInstance().Start();
 
-	auto lastTime = std::chrono::high_resolution_clock::now();
-	float lag = 0.0f;
-
-	// todo: this update loop could use some work.
 	bool doContinue = true;
+	float lag = 0.0f;
 	while (doContinue)
 	{
-		const auto currentTime = std::chrono::high_resolution_clock::now();
-		const float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
-		lastTime = currentTime;
+		const float fixed_time_step = GameTime::GetInstance().GetFixedDeltaTime();
+
+		GameTime::GetInstance().Update();
+
+		const float deltaTime = GameTime::GetInstance().GetDeltaTime();
+
 		lag += deltaTime;
 
 		doContinue = input.ProcessInput();
-
-		while (lag >= FIXED_TIME_STEP) 
+		while (lag >= fixed_time_step)
 		{
-			//fixed Update should be called there;
-			lag -= FIXED_TIME_STEP;
+			FixedUpdate();
+			lag -= fixed_time_step;
 		}
-		sceneManager.Update(deltaTime);
-		renderer.Render();
-
-		const auto sleep_time = currentTime + std::chrono::milliseconds(15) - std::chrono::high_resolution_clock::now();
-		std::this_thread::sleep_for(sleep_time);
+		Update();
+		Render();
 	}
+}
+void dae::Minigin::FixedUpdate()
+{
+
+}
+
+void dae::Minigin::Update()
+{
+	auto& sceneManager = SceneManager::GetInstance();
+	sceneManager.Update();
+}
+
+void dae::Minigin::Render()
+{
+	const auto& renderer = Renderer::GetInstance();
+	renderer.Render();
 }

@@ -1,7 +1,6 @@
 #pragma once
 class Component {
 public:
-    Component() = default;
     virtual ~Component() {}
 
     Component(const Component& other) = delete;
@@ -10,4 +9,7 @@ public:
     Component& operator=(Component&& other) = delete;
 
     virtual void Update() = 0;
+    virtual void Render(float x = 0.0f, float y = 0.0f) const = 0;
+protected:
+    Component() = default;
 };
