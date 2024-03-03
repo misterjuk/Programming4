@@ -15,7 +15,6 @@ namespace dae
         void Update();
         void Render() const;
 
-        // Add a component to the GameObject
         template <typename T, typename... Args>
         void AddComponent(Args&&... args)
         {
@@ -33,8 +32,6 @@ namespace dae
                     }),
                 m_Components.end());
         }
-
-        // Get a component from the GameObject
         template <typename T>
         T* GetComponent() const
         {
@@ -45,8 +42,6 @@ namespace dae
             }
             return nullptr;
         }
-
-        // Check if gameObject has this type of component
         template <typename T>
         bool HasComponent() const
         {
@@ -64,6 +59,9 @@ namespace dae
         GameObject(GameObject&& other) = delete;
         GameObject& operator=(const GameObject& other) = delete;
         GameObject& operator=(GameObject&& other) = delete;
+
+
+        void SetParent(GameObject* parent, bool keepWorldPosition);
 
     private:
         std::vector<std::unique_ptr<Component>> m_Components;

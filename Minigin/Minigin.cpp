@@ -90,25 +90,20 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	GameTime::GetInstance().Start();
 
 	bool doContinue = true;
-	float lag = 0.0f;
+
 	while (doContinue)
 	{
-		const float fixed_time_step = GameTime::GetInstance().GetFixedDeltaTime();
-
 		GameTime::GetInstance().Update();
 
-		const float deltaTime = GameTime::GetInstance().GetDeltaTime();
-
-		lag += deltaTime;
+		GameTime::GetInstance().GetDeltaTime();
 
 		doContinue = input.ProcessInput();
-		while (lag >= fixed_time_step)
-		{
-			FixedUpdate();
-			lag -= fixed_time_step;
-		}
+
 		Update();
 		Render();
+
+		const auto sleep_time = std::chrono::high_resolution_clock::now() + std::chrono::milliseconds(1000/165) - std::chrono::high_resolution_clock::now();
+		std::this_thread::sleep_for(sleep_time);
 	}
 }
 void dae::Minigin::FixedUpdate()

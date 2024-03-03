@@ -30,5 +30,20 @@ void dae::GameObject::Render() const
         
     }
 }
-
+//void dae::GameObject::SetParent(GameObject* parent, bool keepWorldPosition)
+//{
+//    if (IsChild(parent) || parent == this || m_parent == parent)
+//        return;
+//    if (parent == nullptr)
+//        SetLocalPosition(GetWorldPosition());
+//    else
+//    {
+//        if (keepWorldPosition)
+//            SetLocalPosition(GetLocalPosition() - parent->GetWorldPosition());
+//        SetPositionDirty()
+//            if (m_parent) m_parent->RemoveChild(this);
+//        m_parent = parent;
+//        if (m_parent) m_parent->AddChild(this)
+//    }
+//}
 

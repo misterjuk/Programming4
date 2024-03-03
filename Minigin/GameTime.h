@@ -20,6 +20,6 @@ private:
     std::chrono::high_resolution_clock::time_point m_lastTime;
     float m_DeltaTime{};
     float m_FixedDeltaTime{};
-    const float m_FixedTimeStep{ 0.02f };
+    const float m_FixedTimeStep{ 0.1f };
 
 };
