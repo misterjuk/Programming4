@@ -3,8 +3,8 @@
 #include "GameTime.h"
 #include "TextComponent.h"
 
-FPSComponent::FPSComponent(const std::weak_ptr<dae::GameObject>& pGameObject)
-    : Component(), m_GameObject(pGameObject)
+FPSComponent::FPSComponent(std::weak_ptr<dae::GameObject> owner)
+    : Component(owner)
 {
 }
 
@@ -20,7 +20,7 @@ void FPSComponent::Update()
   
        m_text = "FPS: " + ss.str();
   
-       if (const auto gameObject = m_GameObject.lock())
+       if (const auto gameObject = m_Owner.lock())
        {
            if (const auto textComponent = gameObject->GetComponent<TextComponent>(); textComponent != nullptr)
            {

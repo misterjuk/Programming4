@@ -3,9 +3,15 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include "Texture2D.h"
+#include "GameObject.h"
 
-RenderComponent::RenderComponent(const std::shared_ptr<dae::Texture2D>& texture)
-    : Component(), m_texture(texture)
+
+RenderComponent::RenderComponent(std::weak_ptr<dae::GameObject> owner , const std::shared_ptr<dae::Texture2D>& texture)
+    : Component(owner), m_texture(texture)
+{
+}
+RenderComponent::RenderComponent(std::weak_ptr<dae::GameObject> owner)
+    : Component(owner), m_texture(nullptr)
 {
 }
 

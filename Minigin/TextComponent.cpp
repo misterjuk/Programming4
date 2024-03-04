@@ -5,13 +5,13 @@
 #include "Font.h"
 #include "Texture2D.h"
 
-TextComponent::TextComponent(const std::string& text, std::shared_ptr<dae::Font> font)
-	: RenderComponent(nullptr), m_needsUpdate(true), m_text(text), m_font(std::move(font))
+TextComponent::TextComponent(std::weak_ptr<dae::GameObject> owner, const std::string& text, std::shared_ptr<dae::Font> font)
+	: RenderComponent(owner, nullptr), m_needsUpdate(true), m_text(text), m_font(std::move(font))
 {
 
 }
-TextComponent::TextComponent(std::shared_ptr<dae::Font> font)
-	: RenderComponent(nullptr), m_needsUpdate(true), m_text("Text"), m_font(std::move(font))
+TextComponent::TextComponent(std::weak_ptr<dae::GameObject> owner, std::shared_ptr<dae::Font> font)
+	: RenderComponent(owner, nullptr), m_needsUpdate(true), m_text("Text"), m_font(std::move(font))
 {
 }
 

@@ -11,8 +11,8 @@ namespace dae
 class RenderComponent : public Component
 {
 public:
-    RenderComponent() = default;
-    RenderComponent(const std::shared_ptr<dae::Texture2D>& texture);
+    RenderComponent(std::weak_ptr<dae::GameObject> owner);
+    RenderComponent(std::weak_ptr<dae::GameObject> owner ,const std::shared_ptr<dae::Texture2D>& texture);
     virtual ~RenderComponent() = default;
 
     void Update() override;

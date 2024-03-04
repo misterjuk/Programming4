@@ -11,9 +11,9 @@ public:
 
 	void SetText(const std::string& text);
 
-	TextComponent(const std::string& text, std::shared_ptr<dae::Font> font);
-	TextComponent(std::shared_ptr<dae::Font> font);
-	virtual ~TextComponent() = default;
+	TextComponent(std::weak_ptr<dae::GameObject> owner, const std::string& text, std::shared_ptr<dae::Font> font );
+	TextComponent(std::weak_ptr<dae::GameObject> owner, std::shared_ptr<dae::Font> font);
+	~TextComponent() = default;
 
 	TextComponent(const TextComponent& other) = delete;
 	TextComponent(TextComponent&& other) = delete;

@@ -2,6 +2,7 @@
 #include <chrono>
 
 #include "Singleton.h"
+#include <array>
 
 class GameTime final : public dae::Singleton<GameTime>
 {
@@ -21,5 +22,8 @@ private:
     float m_DeltaTime{};
     float m_FixedDeltaTime{};
     const float m_FixedTimeStep{ 0.1f };
+
+    std::array<float, 10> m_DeltaTimeBuffer;
+    size_t m_CurrentIndex = 0;
 
 };

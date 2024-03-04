@@ -1,4 +1,9 @@
 #pragma once
+#include <memory>
+namespace dae 
+{
+    class GameObject;
+}
 class Component {
 public:
     virtual ~Component() {}
@@ -11,5 +16,6 @@ public:
     virtual void Update() = 0;
     virtual void Render(float x = 0.0f, float y = 0.0f) const = 0;
 protected:
-    Component() = default;
+    Component(std::weak_ptr<dae::GameObject> owner);
+    std::weak_ptr<dae::GameObject> m_Owner;
 };
