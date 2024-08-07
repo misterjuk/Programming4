@@ -19,6 +19,9 @@ public:
 	void SetLocalPosition(const float x, const float y, const float z);
 	void SetLocalPosition(const glm::vec3& newPosition);
 
+	void Translate(glm::vec3 const& offset);
+
+
 	glm::vec3 GetLocalPosition() const;
 
 	glm::vec3 GetWorldPosition();

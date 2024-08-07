@@ -15,6 +15,7 @@ public:
     FPSComponent(std::weak_ptr<dae::GameObject> owner);
     ~FPSComponent() = default;
 
+
     void Update() override;
     void Render(float x = 0.0f, float y =0.0f) const override;
 

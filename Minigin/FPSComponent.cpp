@@ -20,7 +20,7 @@ void FPSComponent::Update()
   
        m_text = "FPS: " + ss.str();
   
-       if (const auto gameObject = m_Owner.lock())
+       if (const auto gameObject = m_Owner.lock().get())
        {
            if (const auto textComponent = gameObject->GetComponent<TextComponent>(); textComponent != nullptr)
            {

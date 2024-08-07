@@ -22,6 +22,10 @@ void Transform::SetLocalPosition(const glm::vec3& newPosition)
 
     SetPositionDirty(true);
 }
+void Transform::Translate(glm::vec3 const& offset)
+{
+    SetLocalPosition(GetLocalPosition() + offset);
+}
 void Transform::SetLocalPosition(const float x, const float y, const float z)
 {
     m_position.x = x;
@@ -46,13 +50,13 @@ void Transform::UpdateWorldPosition()
 {
     if (m_positionIsDirty)
     {
-        if (m_Owner.lock()->GetParent() == nullptr)
+        if (m_Owner.lock().get()->GetParent() == nullptr)
         {
             m_worldPosition = GetLocalPosition();
         }
         else
         {
-            m_worldPosition = m_Owner.lock()->GetParent()->GetComponent<Transform>()->GetWorldPosition() + GetLocalPosition();
+            m_worldPosition = m_Owner.lock().get()->GetParent()->GetComponent<Transform>()->GetWorldPosition() + GetLocalPosition();
         }
     }
     m_positionIsDirty = false;

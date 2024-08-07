@@ -20,5 +20,6 @@ public:
     void SetTexture(const std::string& filename);
 
 protected:
+    //load texture returns the shared ptr, so probablt no need for uniqueptr
     std::shared_ptr<dae::Texture2D> m_texture;
 };

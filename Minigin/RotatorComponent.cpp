@@ -14,8 +14,9 @@ void RotatorComponent::Update()
     if (m_Owner.lock().get() == nullptr)
         return;
 
-    auto transform = m_Owner.lock()->GetComponent<Transform>();
+    auto transform = m_Owner.lock().get()->GetComponent<Transform>();
 
+    //TODO Should cap it, will run into issue when its too large;
     m_Angle += m_Speed * GameTime::GetInstance().GetDeltaTime();
 
     glm::vec3 position;

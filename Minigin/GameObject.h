@@ -1,14 +1,14 @@
 #pragma once
-#include <memory>
+
 
 #include <vector>
 #include "Component.h"
 #include <stdexcept>
+#include <memory>
 
 namespace dae
 {
-    class Texture2D;
-    class GameObject final :public std::enable_shared_from_this<GameObject>
+    class GameObject final
     {
     public:
         void Update();
@@ -19,9 +19,7 @@ namespace dae
         {
             try
             {
-                auto ownerWeakPtr = std::weak_ptr<GameObject>(shared_from_this());
-                auto component = std::make_unique<T>(ownerWeakPtr, std::forward<Args>(args)...);
-                m_Components.emplace_back(std::move(component));
+                m_Components.emplace_back(std::make_unique<T>(std::forward<Args>(args)...));
             }
             catch (const std::exception& e)
             {
@@ -34,15 +32,16 @@ namespace dae
         void RemoveComponent()
         {
             try
-            {
-                m_Components.erase(
-                    std::remove_if(
-                        m_Components.begin(),
-                        m_Components.end(),
-                        [](const auto& component) {
-                            return dynamic_cast<T*>(component.get()) != nullptr;
-                        }),
-                    m_Components.end());
+            {           
+                auto end = std::remove_if(
+                    m_Components.begin(),
+                    m_Components.end(),
+                    [](const auto& component) {
+                        // Check if the component is of type T
+                        return dynamic_cast<T*>(component.get()) != nullptr;
+                    });
+            
+                m_Components.erase(end, m_Components.end());
             }
             catch (const std::exception& e)
             {
@@ -97,19 +96,20 @@ namespace dae
         GameObject& operator=(GameObject&& other) = delete;
 
 
-        void SetParent(std::shared_ptr<GameObject> parent, bool keepWorldPosition);
+        void SetParent(GameObject* parent, bool keepWorldPosition);
 
-        GameObject* GetParent() const { return m_Parent.get(); };
+        GameObject* GetParent() const { return m_Parent; };
 
     private:
         std::vector<std::unique_ptr<Component>> m_Components;
 
-        std::shared_ptr<GameObject> m_Parent{ nullptr };
-        std::vector<std::shared_ptr<GameObject>> m_Children;
+        GameObject* m_Parent;
 
-        bool IsChild(std::shared_ptr<GameObject> childToCheck) const;
-        void AddChild(std::shared_ptr<GameObject> parent);
-        void RemoveChild(std::shared_ptr<GameObject> parent);
+        std::vector<std::unique_ptr<GameObject>> m_Children;
+
+        bool IsChild(GameObject* childToCheck) const;
+        void AddChild(GameObject* child);
+        void RemoveChild(GameObject* child);
 
         void SetPositionDirty(const bool isPositionDirty);
     };

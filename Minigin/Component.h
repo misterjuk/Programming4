@@ -6,7 +6,8 @@ namespace dae
 }
 class Component {
 public:
-    virtual ~Component() {}
+    virtual ~Component() = default;
+    Component(std::weak_ptr<dae::GameObject> owner);
 
     Component(const Component& other) = delete;
     Component(Component&& other) = delete;
@@ -16,6 +17,6 @@ public:
     virtual void Update() = 0;
     virtual void Render(float x = 0.0f, float y = 0.0f) const = 0;
 protected:
-    Component(std::weak_ptr<dae::GameObject> owner);
+    
     std::weak_ptr<dae::GameObject> m_Owner;
 };

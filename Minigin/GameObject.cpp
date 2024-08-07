@@ -31,43 +31,54 @@ void dae::GameObject::Render() const
        
    }
 }
-void dae::GameObject::SetParent(std::shared_ptr<dae::GameObject> parent, bool keepWorldPosition)
+
+void dae::GameObject::SetParent(GameObject* parent, bool keepWorldPosition)
 {
-    if (IsChild(parent) || parent.get() == this || m_Parent == parent)
+    if (IsChild(parent) || parent == this || m_Parent == parent)
     {
         return;
     }
     if (parent == nullptr)
     {
+        if (m_Parent)
+        {
+            m_Parent->RemoveChild(this);
+        }
+
+        m_Parent = nullptr;
+
         GetComponent<Transform>()->SetLocalPosition(GetComponent<Transform>()->GetWorldPosition());
     }
     else
     {
         if (keepWorldPosition)
         {
-            GetComponent<Transform>()->SetLocalPosition(GetComponent<Transform>()->GetLocalPosition() - parent->GetComponent<Transform>()->GetWorldPosition());
+            GetComponent<Transform>()->SetLocalPosition(GetComponent<Transform>()->GetWorldPosition() - parent->GetComponent<Transform>()->GetWorldPosition());
         }
 
         SetPositionDirty(true);
 
         if (m_Parent)
         {
-            m_Parent->RemoveChild(shared_from_this());
+           
+            m_Parent->RemoveChild(this);
         }
 
         m_Parent = parent;
 
-        if (m_Parent) 
+        if (m_Parent)
         {
-            m_Parent->AddChild(shared_from_this());
+           
+            m_Parent->AddChild(this);
         }
     }
 }
-bool dae::GameObject::IsChild(std::shared_ptr<GameObject> childToCheck) const
+
+bool dae::GameObject::IsChild(GameObject* childToCheck) const
 {
     for (const auto& child : m_Children)
     {
-        if (child == childToCheck || child->IsChild(childToCheck))
+        if (child.get() == childToCheck || child->IsChild(childToCheck))
         {
             return true;
         }
@@ -75,7 +86,7 @@ bool dae::GameObject::IsChild(std::shared_ptr<GameObject> childToCheck) const
     return false;
 }
 
-void dae::GameObject::AddChild(std::shared_ptr<GameObject> child)
+void dae::GameObject::AddChild(GameObject* child)
 {
     // Add the child to the vector of children
 
@@ -83,18 +94,24 @@ void dae::GameObject::AddChild(std::shared_ptr<GameObject> child)
      m_Children.emplace_back(child);
 }
 
-void dae::GameObject::RemoveChild(std::shared_ptr<GameObject> child)
+void dae::GameObject::RemoveChild(GameObject* child)
 {
     m_Children.erase(
         std::remove_if(
             m_Children.begin(),
             m_Children.end(),
-            [child](const std::shared_ptr<GameObject>& ptr) { return ptr == child; }
+            [child = std::move(child)](const std::unique_ptr<GameObject>& ptr) { return ptr.get() == child; }
         ),
         m_Children.end()
     );
 }
 void dae::GameObject::SetPositionDirty(const bool isPositionDirty) 
 {
+    //TOOD Set childs dirty
     GetComponent<Transform>()->SetPositionDirty(isPositionDirty);
+
+    for (const auto& child : m_Children)
+    {
+        child->SetPositionDirty(isPositionDirty);
+    }
 }

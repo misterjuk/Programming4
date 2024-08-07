@@ -19,11 +19,11 @@ public:
 
 private:
 	// Member variables
-	float m_Radius;  // Rotation radius
-	float m_Speed;   // Rotation speed
+	float m_Radius{};  // Rotation radius
+	float m_Speed{};   // Rotation speed
 	
 	float m_Angle{};
 
-	glm::vec3 m_TargetPosition;
+	glm::vec3 m_TargetPosition{};
 };
 
