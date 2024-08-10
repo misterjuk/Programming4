@@ -33,7 +33,7 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h">
+    <ClInclude Include="TransformComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
@@ -75,6 +75,18 @@
     <ClInclude Include="Controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IObserver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Subject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -92,7 +104,7 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
+    <ClCompile Include="TransformComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
@@ -135,6 +147,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IObserver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Subject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

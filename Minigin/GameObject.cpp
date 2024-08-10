@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
-#include "Transform.h"
+#include "TransformComponent.h"
 
 dae::GameObject::~GameObject() = default;
 
@@ -17,18 +17,8 @@ void dae::GameObject::Update()
 void dae::GameObject::Render() const
 {
    for (const auto& component : m_Components)
-   {
-       if (HasComponent<Transform>())
-       {
-           const auto transform = GetComponent<Transform>();
-          
-           component->Render(transform->GetWorldPosition().x, transform->GetWorldPosition().y);
-       }
-       else 
-       {
-           component->Render();
-       }
-       
+   {    
+       component->Render();      
    }
 }
 
@@ -47,13 +37,13 @@ void dae::GameObject::SetParent(GameObject* parent, bool keepWorldPosition)
 
         m_Parent = nullptr;
 
-        GetComponent<Transform>()->SetLocalPosition(GetComponent<Transform>()->GetWorldPosition());
+        GetComponent<TransformComponent>()->SetLocalPosition(GetComponent<TransformComponent>()->GetWorldPosition());
     }
     else
     {
         if (keepWorldPosition)
         {
-            GetComponent<Transform>()->SetLocalPosition(GetComponent<Transform>()->GetWorldPosition() - parent->GetComponent<Transform>()->GetWorldPosition());
+            GetComponent<TransformComponent>()->SetLocalPosition(GetComponent<TransformComponent>()->GetWorldPosition() - parent->GetComponent<TransformComponent>()->GetWorldPosition());
         }
 
         SetPositionDirty(true);
@@ -108,7 +98,7 @@ void dae::GameObject::RemoveChild(GameObject* child)
 void dae::GameObject::SetPositionDirty(const bool isPositionDirty) 
 {
     //TOOD Set childs dirty
-    GetComponent<Transform>()->SetPositionDirty(isPositionDirty);
+    GetComponent<TransformComponent>()->SetPositionDirty(isPositionDirty);
 
     for (const auto& child : m_Children)
     {
