@@ -2,24 +2,34 @@
 #include "Scene.h"
 
 void yev::SceneManager::Update()
-{
-	for(auto& scene : m_scenes)
-	{
-		scene->Update();
-	}
+{	
+		m_CurrentScene->Update();
 }
 
 void yev::SceneManager::Render()
 {
-	for (const auto& scene : m_scenes)
-	{
-		scene->Render();
-	}
+	m_CurrentScene->Render();
 }
 
-yev::Scene& yev::SceneManager::CreateScene(const std::string& name)
+void yev::SceneManager::CreateScene(const std::string& name)
 {
-	const auto& scene = std::shared_ptr<Scene>(new Scene(name));
-	m_scenes.push_back(scene);
-	return *scene;
+	m_pScenes.push_back(std::make_unique<Scene>(name));
+}
+
+void yev::SceneManager::SetScene(const std::string& name)
+{
+	m_CurrentScene = GetScene(name);
+}
+
+yev::Scene* yev::SceneManager::GetScene(const std::string& name) const
+{
+	for (const auto& scene : m_pScenes)
+	{
+		if (scene->GetName() == name)
+		{
+			return scene.get();
+		}
+	}
+
+	return nullptr; 
 }

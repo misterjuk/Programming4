@@ -102,7 +102,7 @@ namespace yev {
 
         void Execute() override
         {
-            m_BulletPool->getBullet();
+           // m_BulletPool->getBullet();
         }
 
     private:

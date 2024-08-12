@@ -3,20 +3,25 @@
 #include <string>
 #include <memory>
 #include "Singleton.h"
+#include "Scene.h"
 
 namespace yev
 {
-	class Scene;
+	
 	class SceneManager final : public Singleton<SceneManager>
 	{
 	public:
-		Scene& CreateScene(const std::string& name);
+		void CreateScene(const std::string& name);
+		void SetScene(const std::string& name);
+		Scene* GetScene(const std::string& name) const;
 
 		void Update();
 		void Render();
 	private:
 		friend class Singleton<SceneManager>;
 		SceneManager() = default;
-		std::vector<std::shared_ptr<Scene>> m_scenes;
+		std::vector<std::unique_ptr<yev::Scene>> m_pScenes;
+		yev::Scene* m_CurrentScene;
+
 	};
 }
