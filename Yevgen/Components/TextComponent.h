@@ -13,8 +13,8 @@ namespace yev{
 
 		void SetText(const std::string& text);
 
-		TextComponent(std::weak_ptr<yev::GameObject> owner, const std::string& text, const std::shared_ptr<yev::Font>& font);
-		TextComponent(std::weak_ptr<yev::GameObject> owner, const std::shared_ptr<yev::Font>& font);
+		TextComponent(GameObject* owner, const std::string& text, const std::shared_ptr<yev::Font>& font);
+		TextComponent(GameObject* owner, const std::shared_ptr<yev::Font>& font);
 		~TextComponent() = default;
 
 		TextComponent(const TextComponent& other) = delete;

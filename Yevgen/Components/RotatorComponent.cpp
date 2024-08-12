@@ -4,18 +4,18 @@
 #include "GameTime.h"
 
 namespace yev {
-    RotatorComponent::RotatorComponent(std::weak_ptr<yev::GameObject> owner)
+    RotatorComponent::RotatorComponent(GameObject* owner)
         : Component(owner)
     {
-        m_TargetPosition = owner.lock().get()->GetComponent<TransformComponent>()->GetWorldPosition();
+        m_TargetPosition = owner->GetComponent<TransformComponent>()->GetWorldPosition();
     }
 
     void RotatorComponent::Update()
     {
-        if (m_Owner.lock().get() == nullptr)
+        if (m_Owner == nullptr)
             return;
 
-        auto transform = m_Owner.lock().get()->GetComponent<TransformComponent>();
+        auto transform = m_Owner->GetComponent<TransformComponent>();
 
         //TODO Should cap it, will run into issue when its too large;
         m_Angle += m_Speed * GameTime::GetInstance().GetDeltaTime();

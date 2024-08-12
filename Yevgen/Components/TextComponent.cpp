@@ -6,12 +6,12 @@
 #include "Texture2D.h"
 
 namespace yev {
-	TextComponent::TextComponent(std::weak_ptr<yev::GameObject> owner, const std::string& text, const std::shared_ptr<yev::Font>& font)
+	TextComponent::TextComponent(GameObject* owner, const std::string& text, const std::shared_ptr<yev::Font>& font)
 		: RenderComponent(owner, nullptr), m_needsUpdate(true), m_text(text), m_font(font)
 	{
 
 	}
-	TextComponent::TextComponent(std::weak_ptr<yev::GameObject> owner, const std::shared_ptr<yev::Font>& font)
+	TextComponent::TextComponent(GameObject* owner, const std::shared_ptr<yev::Font>& font)
 		: RenderComponent(owner, nullptr), m_needsUpdate(true), m_text("Text"), m_font(font)
 	{
 	}

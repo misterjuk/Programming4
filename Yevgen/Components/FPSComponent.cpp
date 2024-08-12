@@ -5,7 +5,7 @@
 
 
 namespace yev {
-    FPSComponent::FPSComponent(std::weak_ptr<yev::GameObject> owner)
+    FPSComponent::FPSComponent(GameObject* owner)
         : Component(owner)
     {
     }
@@ -22,7 +22,7 @@ namespace yev {
 
             m_text = "FPS: " + ss.str();
 
-            if (const auto gameObject = m_Owner.lock().get())
+            if (const auto gameObject = m_Owner)
             {
                 if (const auto textComponent = gameObject->GetComponent<TextComponent>(); textComponent != nullptr)
                 {

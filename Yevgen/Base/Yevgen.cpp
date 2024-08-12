@@ -10,8 +10,8 @@
 #include "Renderer.h"
 #include "GameTime.h"
 #include "ResourceManager.h"
-
-
+#include "SoundManager.h"
+#include "ServiceLocator.h"
 #include <chrono>
 #include <thread>
 
@@ -71,6 +71,9 @@ yev::Yevgen::Yevgen(const std::string &dataPath)
 	Renderer::GetInstance().Init(g_window);
 
 	ResourceManager::GetInstance().Init(dataPath);
+
+	std::unique_ptr pLoggingSoundManager{ std::make_unique<yev::LoggingSoundManager>(std::make_unique<yev::SoundManager>()) };
+	yev::ServiceLocator::GetInstance().RegisterSoundSystem(std::move(pLoggingSoundManager));
 }
 
 yev::Yevgen::~Yevgen()
@@ -85,6 +88,8 @@ void yev::Yevgen::Run(const std::function<void()>& load)
 {
 
 	load();
+
+	ServiceLocator::GetInstance().GetSoundSystem()->StartPlayback();
 
 	auto& input = InputManager::GetInstance();
 	GameTime::GetInstance().Start();
@@ -105,6 +110,8 @@ void yev::Yevgen::Run(const std::function<void()>& load)
 		const auto sleep_time = std::chrono::high_resolution_clock::now() + std::chrono::milliseconds(1000/165) - std::chrono::high_resolution_clock::now();
 		std::this_thread::sleep_for(sleep_time);
 	}
+
+	ServiceLocator::GetInstance().GetSoundSystem()->StopPlayback();
 }
 void yev::Yevgen::FixedUpdate()
 {

@@ -7,18 +7,18 @@
 #include "TransformComponent.h"
 
 namespace yev {
-    RenderComponent::RenderComponent(std::weak_ptr<yev::GameObject> owner)
+    RenderComponent::RenderComponent(GameObject* owner)
         : Component(owner), m_texture(nullptr)
     {      
 
         //todo call another constructor
-        m_Transform = owner.lock().get()->GetComponent<TransformComponent>();       
+        m_Transform = owner->GetComponent<TransformComponent>();       
     }
 
-    RenderComponent::RenderComponent(std::weak_ptr<yev::GameObject> owner, const std::shared_ptr<yev::Texture2D>& texture)
+    RenderComponent::RenderComponent(GameObject* owner, const std::shared_ptr<yev::Texture2D>& texture)
         : Component(owner), m_texture(texture)
     {
-        m_Transform = owner.lock().get()->GetComponent<TransformComponent>();
+        m_Transform = owner->GetComponent<TransformComponent>();
     }
 
 

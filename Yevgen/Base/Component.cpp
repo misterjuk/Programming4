@@ -3,7 +3,7 @@
 #include "GameObject.h"
 
 namespace yev {
-	Component::Component(std::weak_ptr<yev::GameObject> owner)
+	Component::Component(GameObject* owner)
 	{
 		m_Owner = owner;
 	}

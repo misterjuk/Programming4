@@ -3,7 +3,6 @@
 #include <SDL.h>
 #include <algorithm>
 
-
 namespace yev
 {
     InputManager::InputManager()
@@ -41,7 +40,7 @@ namespace yev
         // Process keyboard commands based on the current key states
         for (const auto& [key, commandPair] : m_KeyboardCommands)
         {
-            auto [state, command] = commandPair;
+            const auto& [state, command] = commandPair;
             bool keyIsPressed = currentKeyStates[key];
 
             if ((state == InputState::Pressed && keyIsPressed) ||
@@ -58,14 +57,16 @@ namespace yev
         return true;
     }
 
-    void InputManager::BindKeyboardCommand(SDL_Keycode key, InputState state, std::shared_ptr<Command> command)
+    void InputManager::BindKeyboardCommand(SDL_Keycode key, InputState state, std::unique_ptr<Command> command)
     {
-        m_KeyboardCommands[key] = std::make_pair(state, command);
+        m_KeyboardCommands[key] = std::make_pair(state, std::move(command));
+
+       
     }
 
-    void InputManager::BindControllerCommand(unsigned int button, InputState state, std::shared_ptr<Command> command)
+    void InputManager::BindControllerCommand(unsigned int button, InputState state, std::unique_ptr<Command> command)
     {
-        m_Controller->BindControllerCommand(button, state, command);
+        m_Controller->BindControllerCommand(button, state, std::move(command));
     }
 
     bool InputManager::IsPressed(SDL_Keycode key)

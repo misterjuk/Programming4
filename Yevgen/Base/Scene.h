@@ -1,6 +1,6 @@
 #pragma once
 #include "SceneManager.h"
-
+#include "GameObject.h"
 namespace yev
 {
 	class GameObject;
@@ -8,8 +8,8 @@ namespace yev
 	{
 		friend Scene& SceneManager::CreateScene(const std::string& name);
 	public:
-		void Add(std::shared_ptr<GameObject> object);
-		void Remove(std::shared_ptr<GameObject> object);
+		void Add(std::unique_ptr<GameObject> object);
+		void Remove(std::unique_ptr<GameObject> object);
 		void RemoveAll();
 
 		void Update();
@@ -25,7 +25,7 @@ namespace yev
 		explicit Scene(const std::string& name);
 
 		std::string m_name;
-		std::vector < std::shared_ptr<GameObject>> m_objects{};
+		std::vector < std::unique_ptr<GameObject>> m_objects{};
 
 		static unsigned int m_idCounter; 
 	};

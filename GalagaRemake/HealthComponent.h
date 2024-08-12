@@ -5,13 +5,13 @@
 #include "Component.h"
 #include "TextComponent.h"
 
-#include "TextComponent.h"
+#include "GameObject.h"
 	class HealthComponent final : public yev::IObserver , public yev::Component
 	{
 	public:
 
 
-		HealthComponent(std::weak_ptr<yev::GameObject> owner);
+		HealthComponent(yev::GameObject* owner);
 		virtual ~HealthComponent() = default;
 
 		HealthComponent(const HealthComponent& other) = delete;

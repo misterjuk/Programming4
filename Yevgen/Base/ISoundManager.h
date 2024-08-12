@@ -1,3 +1,8 @@
+// HEAVILY INSPIRED FROM AdriaanMusschoot and Amugen https://github.com/AdriaanMusschoot/Amugen/tree/master
+// LITTLE OF MY WORK
+
+
+
 #ifndef YEV_ISOUND_MANAGER_H
 #define YEV_ISOUND_MANAGER_H
 

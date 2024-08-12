@@ -28,14 +28,14 @@ namespace yev
         bool ProcessInput();
 
         // Key binding for keyboard input
-        void BindKeyboardCommand(SDL_Keycode key, InputState state, std::shared_ptr<Command> command);
+        void BindKeyboardCommand(SDL_Keycode key, InputState state, std::unique_ptr<Command> command);
 
         // Button binding for controller input
-        void BindControllerCommand(unsigned int button, InputState state, std::shared_ptr<Command> command);
+        void BindControllerCommand(unsigned int button, InputState state, std::unique_ptr<Command> command);
 
     private:
        // std::unique_ptr<Controller> m_Controller;
-        std::unordered_map<SDL_Keycode, std::pair<InputState, std::shared_ptr<Command>>> m_KeyboardCommands;
+        std::unordered_map<SDL_Keycode, std::pair<InputState, std::unique_ptr<Command>>> m_KeyboardCommands;
 
         bool IsPressed(SDL_Keycode key);
 

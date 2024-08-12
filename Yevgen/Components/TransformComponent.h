@@ -11,7 +11,7 @@ namespace yev
 	{
 	public:
 
-		TransformComponent(std::weak_ptr<yev::GameObject> owner);
+		TransformComponent(GameObject* owner);
 
 		void Update() override;
 	

@@ -17,10 +17,10 @@ namespace yev
         ~Controller();
 
         void Update();
-        void BindControllerCommand(unsigned int button, InputState state, std::shared_ptr<Command> command);
+        void BindControllerCommand(unsigned int button, InputState state, std::unique_ptr<Command> command);
 
     private:
-        std::unordered_map<unsigned int, std::pair<InputState, std::shared_ptr<Command>>> m_ControllerCommands;
+        std::unordered_map<unsigned int, std::pair<InputState, std::unique_ptr<Command>>> m_ControllerCommands;
         XINPUT_STATE m_ControllerState{};
         bool IsPressed(unsigned int button);
     };

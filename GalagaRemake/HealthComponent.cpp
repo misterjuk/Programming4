@@ -1,12 +1,12 @@
 #include "HealthComponent.h"
 #include "GameObject.h"
 
-HealthComponent::HealthComponent(std::weak_ptr<yev::GameObject> owner)
+HealthComponent::HealthComponent(yev::GameObject* owner)
 	:Component(owner)
 {
-	if (owner.lock().get()->HasComponent<yev::TextComponent>())
+	if (owner->HasComponent<yev::TextComponent>())
 	{
-		m_pHealthText = owner.lock().get()->GetComponent<yev::TextComponent>();
+		m_pHealthText = owner->GetComponent<yev::TextComponent>();
 	}
 }
 

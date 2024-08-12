@@ -2,6 +2,8 @@
 #include "GameObject.h"
 #include "TransformComponent.h"
 #include "HealthComponent.h"
+#include "ServiceLocator.h"
+#include "BulletPool.h"
 
 namespace yev {
     class MoveUpCommand : public Command
@@ -85,6 +87,8 @@ namespace yev {
             {
                 m_Character->GetComponent<HealthComponent>()->Notify(Event::PlayerDamaged, m_Character);
             }
+
+            yev::ServiceLocator::GetInstance().GetSoundSystem()->LoadSoundEffect(0, "Sounds/Shoot.wav", 1, 1);
         }
 
     private:
@@ -94,17 +98,15 @@ namespace yev {
     class ShootCommand : public Command
     {
     public:
-        ShootCommand(GameObject* character) : m_Character(character) {}
+        ShootCommand(GameObject* character, BulletPool* bulletPool) : m_Character(character) {}
 
         void Execute() override
         {
-            if (m_Character->HasComponent<HealthComponent>())
-            {
-                m_Character->GetComponent<HealthComponent>()->Notify(Event::PlayerDamaged, m_Character);
-            }
+            m_BulletPool->getBullet();
         }
 
     private:
         GameObject* m_Character;
+        BulletPool* m_BulletPool;
     };
 }

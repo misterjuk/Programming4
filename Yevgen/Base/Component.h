@@ -7,7 +7,7 @@ namespace yev
     class Component {
     public:
         virtual ~Component() = default;
-        Component(std::weak_ptr<yev::GameObject> owner);
+        Component(GameObject* owner);
 
         Component(const Component& other) = delete;
         Component(Component&& other) = delete;
@@ -21,7 +21,7 @@ namespace yev
     protected:
         
         
-
-        std::weak_ptr<yev::GameObject> m_Owner;
+            
+        GameObject* m_Owner;
     };
 }

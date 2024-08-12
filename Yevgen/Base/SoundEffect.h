@@ -1,3 +1,7 @@
+
+// HEAVILY INSPIRED FROM AdriaanMusschoot and Amugen https://github.com/AdriaanMusschoot/Amugen/tree/master
+// LITTLE OF MY WORK
+
 #ifndef YEV_SOUND_EFFECT_H
 #define YEV_SOUND_EFFECT_H
 

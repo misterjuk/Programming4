@@ -2,7 +2,7 @@
 #include "GameObject.h"
 
 namespace yev {
-    TransformComponent::TransformComponent(std::weak_ptr<yev::GameObject> owner) :
+    TransformComponent::TransformComponent(GameObject* owner) :
         Component(owner)
     {
 
@@ -47,13 +47,13 @@ namespace yev {
     {
         if (m_positionIsDirty)
         {
-            if (m_Owner.lock().get()->GetParent() == nullptr)
+            if (m_Owner->GetParent() == nullptr)
             {
                 m_worldPosition = GetLocalPosition();
             }
             else
             {
-                m_worldPosition = m_Owner.lock().get()->GetParent()->GetComponent<TransformComponent>()->GetWorldPosition() + GetLocalPosition();
+                m_worldPosition = m_Owner->GetParent()->GetComponent<TransformComponent>()->GetWorldPosition() + GetLocalPosition();
             }
         }
         m_positionIsDirty = false;

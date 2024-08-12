@@ -11,7 +11,7 @@ namespace yev
     class FPSComponent final : public Component
     {
     public:
-        FPSComponent(std::weak_ptr<yev::GameObject> owner);
+        FPSComponent(GameObject* owner);
         ~FPSComponent() = default;
 
 

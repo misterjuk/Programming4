@@ -1,3 +1,7 @@
+// HEAVILY INSPIRED FROM AdriaanMusschoot and Amugen https://github.com/AdriaanMusschoot/Amugen/tree/master
+// LITTLE OF MY WORK
+
+
 #include "SoundManager.h"
 
 #include "ResourceManager.h"

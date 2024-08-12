@@ -7,7 +7,7 @@ namespace yev {
 	{
 	public:
 
-		RotatorComponent(std::weak_ptr<yev::GameObject> owner);
+		RotatorComponent(GameObject* owner);
 		~RotatorComponent() = default;
 
 		void Update() override;

@@ -100,7 +100,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>Base;Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Base;Components;$(SolutionDir)3rdParty\SDL2_mixer\include;$(SolutionDir)3rdParty\SDL2_ttf\include;$(SolutionDir)3rdParty\SDL2_image\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\SDL2\include</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -112,7 +112,8 @@
     </Link>
     <PostBuildEvent />
     <Lib>
-      <AdditionalDependencies>xinput.lib</AdditionalDependencies>
+      <AdditionalDependencies>xinput.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>SDL2_mixer.lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -122,7 +123,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>Base;Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Base;Components;$(SolutionDir)3rdParty\SDL2_mixer\include;$(SolutionDir)3rdParty\SDL2_ttf\include;$(SolutionDir)3rdParty\SDL2_image\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\SDL2\include</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -135,7 +136,8 @@
     </Link>
     <PostBuildEvent />
     <Lib>
-      <AdditionalDependencies>xinput.lib</AdditionalDependencies>
+      <AdditionalDependencies>xinput.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>SDL2_mixer.lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -147,7 +149,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>Base;Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Base;Components;$(SolutionDir)3rdParty\SDL2_mixer\include;$(SolutionDir)3rdParty\SDL2_ttf\include;$(SolutionDir)3rdParty\SDL2_image\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\SDL2\include</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -160,6 +162,10 @@
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent />
+    <Lib>
+      <AdditionalDependencies>xinput.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>SDL2_mixer.lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -170,7 +176,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>Base;Components;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Base;Components;$(SolutionDir)3rdParty\SDL2_mixer\include;$(SolutionDir)3rdParty\SDL2_ttf\include;$(SolutionDir)3rdParty\SDL2_image\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)3rdParty\SDL2\include</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -183,6 +189,10 @@
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent />
+    <Lib>
+      <AdditionalDependencies>xinput.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>SDL2_mixer.lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Base\Comand.cpp" />
@@ -197,6 +207,9 @@
     <ClCompile Include="Base\ResourceManager.cpp" />
     <ClCompile Include="Base\Scene.cpp" />
     <ClCompile Include="Base\SceneManager.cpp" />
+    <ClCompile Include="Base\ServiceLocator.cpp" />
+    <ClCompile Include="Base\SoundEffect.cpp" />
+    <ClCompile Include="Base\SoundManager.cpp" />
     <ClCompile Include="Base\Subject.cpp" />
     <ClCompile Include="Base\Texture2D.cpp" />
     <ClCompile Include="Base\Yevgen.cpp" />
@@ -215,11 +228,15 @@
     <ClInclude Include="Base\GameTime.h" />
     <ClInclude Include="Base\InputManager.h" />
     <ClInclude Include="Base\IObserver.h" />
+    <ClInclude Include="Base\ISoundManager.h" />
     <ClInclude Include="Base\Renderer.h" />
     <ClInclude Include="Base\ResourceManager.h" />
     <ClInclude Include="Base\Scene.h" />
     <ClInclude Include="Base\SceneManager.h" />
+    <ClInclude Include="Base\ServiceLocator.h" />
     <ClInclude Include="Base\Singleton.h" />
+    <ClInclude Include="Base\SoundEffect.h" />
+    <ClInclude Include="Base\SoundManager.h" />
     <ClInclude Include="Base\Subject.h" />
     <ClInclude Include="Base\Texture2D.h" />
     <ClInclude Include="Base\Yevgen.h" />

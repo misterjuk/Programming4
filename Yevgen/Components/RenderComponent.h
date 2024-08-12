@@ -13,8 +13,8 @@ namespace yev
     class RenderComponent : public Component
     {
     public:
-        RenderComponent(std::weak_ptr<yev::GameObject> owner);
-        RenderComponent(std::weak_ptr<yev::GameObject> owner, const std::shared_ptr<yev::Texture2D>& texture);
+        RenderComponent(GameObject* owner);
+        RenderComponent(GameObject* owner, const std::shared_ptr<yev::Texture2D>& texture);
         virtual ~RenderComponent() = default;
 
         void Update() override;

@@ -17,7 +17,7 @@ namespace yev
 
         for (const auto& [button, commandPair] : m_ControllerCommands)
         {
-            auto [state, command] = commandPair;
+            const auto& [state, command] = commandPair;
             bool isPressed = IsPressed(button);
 
             if ((state == InputState::Pressed && isPressed) ||
@@ -26,14 +26,14 @@ namespace yev
             {
                 command->Execute();
             }
-        }
+        }   
     }
 
-    void Controller::BindControllerCommand(unsigned int button, InputState state, std::shared_ptr<Command> command)
+    void Controller::BindControllerCommand(unsigned int button, InputState state, std::unique_ptr<Command> command)
     {
-        m_ControllerCommands[button] = std::make_pair(state, command);
+        m_ControllerCommands[button] = std::make_pair(state, std::move(command));
     }
-
+        
     bool Controller::IsPressed(unsigned int button)
     {
         return (m_ControllerState.Gamepad.wButtons & button) != 0;
