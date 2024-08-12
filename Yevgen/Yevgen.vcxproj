@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{41B0EC47-D48C-4B0F-951B-D98595FFAE0A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Minigin</RootNamespace>
+    <RootNamespace>Yevgen</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>Yevgen</ProjectName>
   </PropertyGroup>
@@ -228,12 +228,6 @@
     <ClInclude Include="Components\RotatorComponent.h" />
     <ClInclude Include="Components\TextComponent.h" />
     <ClInclude Include="Components\TransformComponent.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Minigin\Minigin.vcxproj">
-      <Project>{F1A5C5CC-58EC-4E2F-A9D4-BC8D8C9185C7}</Project>
-      <Name>Minigin</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
