@@ -3,13 +3,11 @@
 #include "SceneManager.h"
 #include "GameEvents.h"
 
-HealthComponent::HealthComponent(yev::GameObject* owner)
+HealthComponent::HealthComponent(yev::GameObject* owner, yev::TextComponent* textComponent)
 	:Component(owner)
 {
-	if (owner->HasComponent<yev::TextComponent>())
-	{
-		m_pHealthText = owner->GetComponent<yev::TextComponent>();
-	}
+
+	m_pHealthText = textComponent;
 }
 
 

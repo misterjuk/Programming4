@@ -26,6 +26,6 @@ private:
 	yev::TransformComponent* m_TransformComponent{nullptr};
 
 	glm::vec3 m_Direction{ (0.0f,0.0,0.0f) };
-	float m_Speed{ 1.0f };
+	float m_Speed{ 200.0f };
 };
 

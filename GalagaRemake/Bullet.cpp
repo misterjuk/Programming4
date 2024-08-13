@@ -11,6 +11,7 @@ Bullet::Bullet(const glm::vec3& startPosition)
 	bullet->AddComponent<yev::RenderComponent>(bullet.get());
 	bullet->GetComponent<yev::RenderComponent>()->SetTexture("PLayerBullet.png");
 	bullet->AddComponent<BulletComponent>(bullet.get());
+	bullet->GetComponent<BulletComponent>()->SetSpeed(200.0f);
 	bullet->AddComponent<BulletCollisionComponent>(bullet.get());
 
 

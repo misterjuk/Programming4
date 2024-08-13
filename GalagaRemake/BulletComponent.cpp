@@ -1,9 +1,9 @@
 #include "BulletComponent.h"
 #include "GameObject.h"
-
+#include "GameTime.h"
 
 BulletComponent::BulletComponent(yev::GameObject* owner)
-	:Component(owner)
+	:Component(owner), m_Speed{200.f}
 {
 
 	m_TransformComponent = owner->GetComponent<yev::TransformComponent>();
@@ -22,6 +22,6 @@ void BulletComponent::SetSpeed(float speed)
 
 void BulletComponent::Update()
 {
-	
-	m_TransformComponent->Translate(m_Direction * m_Speed);
+	glm::vec3 offset = m_Direction * m_Speed * GameTime::GetInstance().GetDeltaTime();
+	m_TransformComponent->Translate(offset);
 }

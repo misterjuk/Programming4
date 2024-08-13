@@ -11,7 +11,7 @@
 	public:
 
 
-		HealthComponent(yev::GameObject* owner);
+		HealthComponent(yev::GameObject* owner, yev::TextComponent* textComponent);
 		virtual ~HealthComponent() = default;
 
 		HealthComponent(const HealthComponent& other) = delete;

@@ -5,6 +5,7 @@
 #include "ServiceLocator.h"
 #include "BulletPool.h"
 #include "GameEvents.h"
+#include "GameTime.h"
 
 namespace yev {
     class MoveUpCommand : public Command
@@ -52,7 +53,7 @@ namespace yev {
         {
             if (m_Character->HasComponent<TransformComponent>())
             {
-                m_Character->GetComponent<TransformComponent>()->Translate(glm::vec3(-1.0f, 0.0f, 0.0f));
+                m_Character->GetComponent<TransformComponent>()->Translate(glm::vec3(-200.0f * GameTime::GetInstance().GetDeltaTime(), 0.0f, 0.0f));
             }
         }
 
@@ -69,7 +70,7 @@ namespace yev {
         {
             if (m_Character->HasComponent<TransformComponent>())
             {
-                m_Character->GetComponent<TransformComponent>()->Translate(glm::vec3(1.0f, 0.0f, 0.0f));
+                m_Character->GetComponent<TransformComponent>()->Translate(glm::vec3(200.0f*GameTime::GetInstance().GetDeltaTime(), 0.0f, 0.0f));
             }
         }
 

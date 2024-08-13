@@ -8,6 +8,7 @@
 #include "SceneManager.h"
 #include <iostream>
 #include "CollisionComponents.h"
+#include "BeeFSMComponent.h"
 
 enum class EnemyType {
 	Bee,
@@ -29,6 +30,7 @@ public:
 		enemy->GetComponent<yev::TransformComponent>()->SetLocalPosition(startPosition.x, startPosition.y, 0);
 		enemy->AddComponent<yev::RenderComponent>(enemy.get());
 		enemy->AddComponent<EnemyCollisionComponent>(enemy.get());
+		enemy->AddComponent<BeeFSMComponent>(enemy.get());
 		switch (type)
 		{
 		case EnemyType::Bee:

@@ -1,18 +1,15 @@
-# Minigin
+# Galaga Remake
 
-Minigin is a very small project using [SDL2](https://www.libsdl.org/) and [glm](https://github.com/g-truc/glm) for 2D c++ game projects. It is in no way a game engine, only a barebone start project where everything sdl related has been set up. It contains glm for vector math, to aleviate the need to write custom vector and matrix classes.
+Welcome to the Galaga Remake project! This is a modern reinterpretation of the classic arcade game **Galaga**, developed using a custom game engine.
 
-[![Build Status](https://github.com/avadae/minigin/actions/workflows/msbuild.yml/badge.svg)](https://github.com/avadae/msbuild/actions)
-[![GitHub Release](https://img.shields.io/github/v/release/avadae/minigin?logo=github&sort=semver)](https://github.com/avadae/minigin/releases/latest)
+## Features
 
-# Goal
-
-Minigin can/may be used as a start project for the exam assignment in the course 'Programming 4' at DAE. In that assignment students need to recreate a popular 80's arcade game with a game engine they need to program themselves. During the course we discuss several game programming patterns, using the book '[Game Programming Patterns](https://gameprogrammingpatterns.com/)' by Robert Nystrom as reading material. 
-
-# Disclaimer
-
-Minigin is, despite perhaps the suggestion in its name, not a game engine. It is just a very simple sdl2 ready project with some of the scaffolding in place to get started. None of the patterns discussed in the course are used yet (except singleton which use we challenge during the course). It is up to the students to implement their own vision for their engine, apply patterns as they see fit, create their game as efficient as possible.
-
-# Use
-
-Download the latest release of this project and compile/run in visual studio. Since students need to have their work on github too, they can use this repository as a template.
+- **Resource Management**: Efficiently handles textures, fonts, and music using RAII. Resources are loaded once and reused as needed.
+- **Scene Management**: Manages game scenes with a dedicated Scene Manager that handles rendering, updating, and object management. Only one scene is rendered and updated at a time.
+- **Game Loop**: The Scene handles the game loop, updating and rendering the game frame-by-frame.
+- **Game Time**: Implements a Singleton pattern for game time management, providing DeltaTime globally.
+- **Input Management**: Utilizes a Singleton Input Manager that employs the Command pattern and Observer pattern for input handling.
+- **Sound Management**: Runs sound on a separate thread and is implemented using the Service Locator pattern.
+- **Component System**: Game objects are managed using a component-based architecture, prioritizing composition over inheritance. Components use the Observer pattern for event handling.
+- **Collision Detection**: Implements basic AABB (Axis-Aligned Bounding Box) collision detection through a collision component.
+- **Object Pooling**: Employs the Object Pool pattern for bullet management, reducing overhead by reusing bullets.

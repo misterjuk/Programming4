@@ -48,6 +48,9 @@
     <ClCompile Include="GameEvents.h">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BeeFSMComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ScoreComponent.h">
@@ -78,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CollisionComponents.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BeeFSMComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

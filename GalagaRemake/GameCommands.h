@@ -17,4 +17,19 @@ public:
     }
 
 };
+
+class RestartGameCommand : public yev::Command
+{
+public:
+    RestartGameCommand() {};
+
+    void Execute() override
+    {
+        if (yev::SceneManager::GetInstance().GetCurrentSceneName() == "EndScreen")
+        {
+            yev::SceneManager::GetInstance().SetScene("Menu");
+        }
+    }
+
+};
 #endif
