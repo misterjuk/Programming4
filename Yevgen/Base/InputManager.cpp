@@ -26,6 +26,11 @@ namespace yev
 
     bool InputManager::ProcessInput()
     {
+        // Update and process controller input
+        m_Controller->Update();
+
+
+
         SDL_Event e;
         std::unordered_map<SDL_Keycode, bool> currentKeyStates;
         std::unordered_map<SDL_Keycode, bool> previousKeyStates;
@@ -76,8 +81,7 @@ namespace yev
         // Store the current key states for the next frame
         m_PreviousKeyStates = currentKeyStates;
 
-        // Update and process controller input
-        m_Controller->Update();
+        
 
         return true;
     }

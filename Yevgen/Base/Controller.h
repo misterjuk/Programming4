@@ -23,6 +23,8 @@ namespace yev
         std::unordered_map<unsigned int, std::pair<InputState, std::unique_ptr<Command>>> m_ControllerCommands;
         XINPUT_STATE m_ControllerState{};
         bool IsPressed(unsigned int button);
+
+        std::unordered_map<unsigned int, bool> m_PreviousButtonStates;
     };
 }
 

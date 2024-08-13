@@ -105,7 +105,12 @@
       <AdditionalDependencies>Yevgen.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;Shell32.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /E /I "$(ProjectDir)Data" "$(TargetDir)Data" </Command>
+      <Command>xcopy /Y "$(SolutionDir)GalagaRemake\Data" "$(OutDir)Data"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.dll" "$(OutDir)"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2_image\lib\x64\*.dll" "$(OutDir)"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutDir)"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\SDL2_mixer.dll" "$(OutDir)"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -129,7 +134,12 @@
       <AdditionalDependencies>Yevgen.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;Shell32.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /E /I "$(ProjectDir)Data" "$(TargetDir)Data" </Command>
+      <Command>xcopy /Y "$(SolutionDir)GalagaRemake\Data" "$(OutDir)Data"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.dll" "$(OutDir)"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2_image\lib\x64\*.dll" "$(OutDir)"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutDir)"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\SDL2_mixer.dll" "$(OutDir)"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -149,7 +159,12 @@
       <AdditionalDependencies>Yevgen.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;Shell32.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /E /I "$(ProjectDir)Data" "$(TargetDir)Data" </Command>
+      <Command>xcopy /Y "$(SolutionDir)GalagaRemake\Data" "$(OutDir)Data"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.dll" "$(OutDir)"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2_image\lib\x64\*.dll" "$(OutDir)"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutDir)"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\SDL2_mixer.dll" "$(OutDir)"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -173,17 +188,32 @@
       <AdditionalDependencies>Yevgen.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;Shell32.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /E /I "$(ProjectDir)Data" "$(TargetDir)Data" </Command>
+      <Command>xcopy /Y "$(SolutionDir)GalagaRemake\Data" "$(OutDir)Data"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.dll" "$(OutDir)"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2_image\lib\x64\*.dll" "$(OutDir)"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutDir)"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\SDL2_mixer.dll" "$(OutDir)"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Exe|Win32'">
     <PostBuildEvent>
-      <Command>xcopy /E /I "$(ProjectDir)Data" "$(TargetDir)Data" </Command>
+      <Command>xcopy /Y "$(SolutionDir)GalagaRemake\Data" "$(OutDir)Data"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.dll" "$(OutDir)"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2_image\lib\x64\*.dll" "$(OutDir)"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutDir)"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\SDL2_mixer.dll" "$(OutDir)"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Exe|x64'">
     <PostBuildEvent>
-      <Command>xcopy /E /I "$(ProjectDir)Data" "$(TargetDir)Data" </Command>
+      <Command>xcopy /Y "$(SolutionDir)GalagaRemake\Data" "$(OutDir)Data"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.dll" "$(OutDir)"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2_image\lib\x64\*.dll" "$(OutDir)"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutDir)"
+xcopy /Y "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\SDL2_mixer.dll" "$(OutDir)"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
