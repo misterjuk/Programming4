@@ -29,7 +29,7 @@ public:
 
 private:
     // Path to the high score file
-    const std::string m_highScoreFilePath = "../Data/highscore.txt";
+    const std::string m_highScoreFilePath = "Data/highscore.txt";
 
     // Current score of the player
     int m_currentScore;
