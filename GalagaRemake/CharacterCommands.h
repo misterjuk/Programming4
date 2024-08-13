@@ -4,6 +4,7 @@
 #include "HealthComponent.h"
 #include "ServiceLocator.h"
 #include "BulletPool.h"
+#include "GameEvents.h"
 
 namespace yev {
     class MoveUpCommand : public Command
@@ -85,7 +86,7 @@ namespace yev {
         {
             if (m_Character->HasComponent<HealthComponent>())
             {
-                m_Character->GetComponent<HealthComponent>()->Notify(Event::PlayerDamaged, m_Character);
+                m_Character->GetComponent<HealthComponent>()->Notify(GameEvents::PlayerDamaged, m_Character);
             }
 
             yev::ServiceLocator::GetInstance().GetSoundSystem()->LoadSoundEffect(0, "Sounds/Shoot.wav", 1, 1);
@@ -107,6 +108,8 @@ namespace yev {
 
             BulletPool& pool = BulletPool::GetInstance();
             pool.getBullet(position.x , position.y, 0, -1);
+
+            yev::ServiceLocator::GetInstance().GetSoundSystem()->LoadSoundEffect(0, "Sounds/Shoot.wav", 1, 1);
         }
 
     private:

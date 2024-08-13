@@ -5,7 +5,7 @@
 
 #include "TransformComponent.h"
 
-class BulletComponent :  public yev::Component
+class BulletComponent final :  public yev::Component
 {
 
 public:

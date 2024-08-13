@@ -23,7 +23,7 @@
 		
 
 
-		void Notify(yev::Event event, yev::GameObject* actor) override;
+		void Notify(IObserver::Event event, yev::GameObject* actor) override;
 	private:
 
 		int m_Health{ 3 };

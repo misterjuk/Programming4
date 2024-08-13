@@ -1,0 +1,27 @@
+50 50 Bee
+150 50 Bee
+250 50 Bee
+350 50 Bee
+450 50 Bee
+550 50 Bee
+
+50 100 Butterfly
+150 100 Butterfly
+250 100 Butterfly
+350 100 Butterfly
+450 100 Butterfly
+550 100 Butterfly
+
+50 150 Boss
+150 150 Boss
+250 150 Boss
+350 150 Boss
+450 150 Boss
+550 150 Boss
+
+50 200 Bee
+150 200 Bee
+250 200 Bee
+350 200 Bee
+450 200 Bee
+550 200 Bee

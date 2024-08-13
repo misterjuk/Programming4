@@ -7,6 +7,7 @@
 #include "RenderComponent.h"
 #include "SceneManager.h"
 #include <iostream>
+#include "CollisionComponents.h"
 
 enum class EnemyType {
 	Bee,
@@ -14,7 +15,7 @@ enum class EnemyType {
 	Boss
 };
 
-class Enemy
+class Enemy final
 {
 
 public:
@@ -27,7 +28,22 @@ public:
 		enemy->AddComponent<yev::TransformComponent>(enemy.get());
 		enemy->GetComponent<yev::TransformComponent>()->SetLocalPosition(startPosition.x, startPosition.y, 0);
 		enemy->AddComponent<yev::RenderComponent>(enemy.get());
-		enemy->GetComponent<yev::RenderComponent>()->SetTexture("PLayerBullet.png");
+		enemy->AddComponent<EnemyCollisionComponent>(enemy.get());
+		switch (type)
+		{
+		case EnemyType::Bee:
+			enemy->GetComponent<yev::RenderComponent>()->SetTexture("Bee.png");
+			break;
+		case EnemyType::Butterfly:
+			enemy->GetComponent<yev::RenderComponent>()->SetTexture("Butterfly.png");
+			break;
+		case EnemyType::Boss:
+			enemy->GetComponent<yev::RenderComponent>()->SetTexture("Boss.png");
+			break;
+		default:
+			break;
+		}
+		
 
 		const auto& scene = yev::SceneManager::GetInstance().GetScene("Main");
 
@@ -49,6 +65,7 @@ public:
 	Enemy& operator=(Enemy&& other) = delete;
 
 
+	yev::GameObject* GetGameObject() const{ return m_pEnemy; }
 private:
 	yev::GameObject* m_pEnemy{nullptr};
 

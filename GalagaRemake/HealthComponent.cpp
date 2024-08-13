@@ -1,6 +1,7 @@
 #include "HealthComponent.h"
 #include "GameObject.h"
 #include "SceneManager.h"
+#include "GameEvents.h"
 
 HealthComponent::HealthComponent(yev::GameObject* owner)
 	:Component(owner)
@@ -13,9 +14,9 @@ HealthComponent::HealthComponent(yev::GameObject* owner)
 
 
 
-void HealthComponent::Notify(yev::Event event, yev::GameObject*)
+void HealthComponent::Notify(IObserver::Event event, yev::GameObject*)
 	{
-		if (event == yev::Event::PlayerDamaged)
+		if (event == GameEvents::PlayerDamaged)
 		{
 			--m_Health;
 

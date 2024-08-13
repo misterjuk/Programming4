@@ -11,6 +11,12 @@ namespace yev
 			return instance;
 		}
 
+		static T* GetPointerInstance()
+		{
+			static T instance{};
+			return &instance;
+		}
+
 		virtual ~Singleton() = default;
 		Singleton(const Singleton& other) = delete;
 		Singleton(Singleton&& other) = delete;

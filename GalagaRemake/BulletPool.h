@@ -7,8 +7,10 @@
 #include "Bullet.h"
 #include "glm/glm.hpp"
 #include "Singleton.h" // Include the Singleton template
+#include "IObserver.h"
+#include "Enemy.h"
 
-class BulletPool : public yev::Singleton<BulletPool>
+class BulletPool final : public yev::Singleton<BulletPool>, public yev::IObserver
 {
     // Allow Singleton to access private members
     friend class yev::Singleton<BulletPool>;
@@ -21,7 +23,7 @@ public:
     BulletPool& operator=(BulletPool&& other) = delete;
 
     // Initialize the bullet pool with a specific size
-    void InitializeBulletPool(int size = 100)
+    void InitializeBulletPool( int size = 100)
     {
         // Pre-allocate bullets and store them in the pool
         bullets.reserve(size);
@@ -34,7 +36,7 @@ public:
     }
 
     // Get a bullet from the pool, set its initial position and direction
-    Bullet* getBullet(int startX, int startY, int dx, int dy)
+    Bullet* getBullet(float startX, float startY, float dx, float dy)
     {
         if (availableBullets.empty())
         {
@@ -74,6 +76,8 @@ public:
             availableBullets.push(bullet);
         }
     }
+
+    void Notify(IObserver::Event event, yev::GameObject* actor) override;
 
 private:
     BulletPool() = default; // Private constructor
