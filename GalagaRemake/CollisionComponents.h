@@ -28,9 +28,9 @@ public:
 
 	bool CheckCollision(const glm::vec4& otherCollider);
 
-	glm::vec4 GetCollider() const { return m_Collider; }
+	glm::vec4 GetCollider(float posX, float posY) const { return glm::vec4(posX,posY, m_ColliderDimensions.z, m_ColliderDimensions.w); }
 private:
-	glm::vec4 m_Collider{ (0.0f,0.0f,20.0f,20.0f) };
+	glm::vec4 m_ColliderDimensions{ (0.0f,0.0f,20.0f,20.0f) };
 	yev::TransformComponent* m_Transform{};
 	Tag m_Tag{ Tag::None };
 };

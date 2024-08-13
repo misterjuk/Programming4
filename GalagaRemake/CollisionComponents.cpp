@@ -3,6 +3,7 @@
 #include "EnemyManager.h"
 #include "BulletPool.h"
 #include "GameEvents.h"
+#include "TransformComponent.h"
 CollisionComponent::CollisionComponent(yev::GameObject* owner, Tag tag):
 	Component(owner), m_Tag{tag}
 {
@@ -17,7 +18,7 @@ bool CollisionComponent::CheckCollision(const glm::vec4& otherCollider) {
 
     // Get the world position and size of the current collider
     glm::vec3 position = m_Transform->GetWorldPosition();
-    glm::vec4 thisCollider(position.x, position.y, m_Collider.z, m_Collider.w);
+    glm::vec4 thisCollider(position.x, position.y, m_ColliderDimensions.z, m_ColliderDimensions.w);
 
     // Check for AABB collision
     return (thisCollider.x < otherCollider.x + otherCollider.z &&
@@ -39,8 +40,10 @@ void BulletCollisionComponent::Update()
     // Iterate through the vector of enemies
     for (Enemy* enemy : enemies)
     {
+
+        glm::vec3 enemyPos = enemy->GetGameObject()->GetComponent<yev::TransformComponent>()->GetWorldPosition();
         // Get the enemy's collider
-        glm::vec4 enemyCollider = enemy->GetGameObject()->GetComponent<EnemyCollisionComponent>()->GetCollider();
+        glm::vec4 enemyCollider = enemy->GetGameObject()->GetComponent<EnemyCollisionComponent>()->GetCollider(enemyPos.x, enemyPos.y);
 
         // Check for a collision between the bullet and the enemy
         if (CheckCollision(enemyCollider))
