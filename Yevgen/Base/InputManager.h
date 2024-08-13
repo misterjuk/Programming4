@@ -36,6 +36,7 @@ namespace yev
     private:
        // std::unique_ptr<Controller> m_Controller;
         std::unordered_map<SDL_Keycode, std::pair<InputState, std::unique_ptr<Command>>> m_KeyboardCommands;
+        std::unordered_map<SDL_Keycode, bool> m_PreviousKeyStates;
 
         bool IsPressed(SDL_Keycode key);
 

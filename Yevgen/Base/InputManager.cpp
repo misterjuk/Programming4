@@ -8,6 +8,18 @@ namespace yev
     InputManager::InputManager()
         : m_Controller(std::make_unique<Controller>())
     {
+
+        // Initialize previous key states with a default value (false)
+        const Uint8* keyboardState = SDL_GetKeyboardState(nullptr);
+        SDL_Keycode keys[] = {
+            SDLK_UP, SDLK_DOWN, SDLK_LEFT, SDLK_RIGHT, // Add other keys as needed
+            // List all the keys you are interested in
+        };
+
+        for (SDL_Keycode key : keys)
+        {
+            m_PreviousKeyStates[key] = keyboardState[SDL_GetScancodeFromKey(key)] != 0;
+        }
     }
 
     InputManager::~InputManager() = default;
@@ -16,14 +28,17 @@ namespace yev
     {
         SDL_Event e;
         std::unordered_map<SDL_Keycode, bool> currentKeyStates;
+        std::unordered_map<SDL_Keycode, bool> previousKeyStates;
 
         // Initialize key states for the frame
         const Uint8* keyboardState = SDL_GetKeyboardState(nullptr);
         for (const auto& [key, commandPair] : m_KeyboardCommands)
         {
             currentKeyStates[key] = keyboardState[SDL_GetScancodeFromKey(key)] != 0;
+            previousKeyStates[key] = m_PreviousKeyStates[key];
         }
 
+        // Process SDL events
         while (SDL_PollEvent(&e))
         {
             if (e.type == SDL_QUIT)
@@ -37,19 +52,29 @@ namespace yev
             }
         }
 
-        // Process keyboard commands based on the current key states
+        // Update commands based on key state changes
         for (const auto& [key, commandPair] : m_KeyboardCommands)
         {
             const auto& [state, command] = commandPair;
             bool keyIsPressed = currentKeyStates[key];
+            bool keyWasPressed = previousKeyStates[key];
 
-            if ((state == InputState::Pressed && keyIsPressed) ||
-                (state == InputState::Released && !keyIsPressed && IsPressed(key)) ||
-                (state == InputState::Held && keyIsPressed))
+            if (state == InputState::Pressed && keyIsPressed && !keyWasPressed)
+            {
+                command->Execute();
+            }
+            else if (state == InputState::Released && !keyIsPressed && keyWasPressed)
+            {
+                command->Execute();
+            }
+            else if (state == InputState::Held && keyIsPressed)
             {
                 command->Execute();
             }
         }
+
+        // Store the current key states for the next frame
+        m_PreviousKeyStates = currentKeyStates;
 
         // Update and process controller input
         m_Controller->Update();

@@ -109,7 +109,7 @@ namespace yev
 
         std::vector<std::unique_ptr<GameObject>> m_Children;
 
-        bool m_isActive;
+        bool m_isActive{ true };
 
         bool IsChild(GameObject* childToCheck) const;
         void AddChild(GameObject* child);

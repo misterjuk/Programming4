@@ -6,6 +6,8 @@
 #include "TransformComponent.h"
 #include "RenderComponent.h"
 #include "SceneManager.h"
+#include "BulletComponent.h"
+#include <iostream>
 class Bullet
 {
 
@@ -13,26 +15,26 @@ public:
 
 
 
-	Bullet(const glm::vec3& startPosition, const glm::vec3& direction)
-		:m_Direction{ direction }
+	Bullet(const glm::vec3& startPosition)	
 	{
-		m_pBullet = std::make_unique<yev::GameObject>();
+		std::unique_ptr<yev::GameObject> bullet = std::make_unique<yev::GameObject>();
 		
-		m_pBullet->AddComponent<yev::TransformComponent>(m_pBullet.get());
-		m_pBullet->GetComponent<yev::TransformComponent>()->SetLocalPosition(startPosition.x, startPosition.y, 0);
-		m_pBullet->AddComponent<yev::RenderComponent>(m_pBullet.get());
-		m_pBullet->GetComponent<yev::RenderComponent>()->SetTexture("PLayerBullet.png");
+		bullet->AddComponent<yev::TransformComponent>(bullet.get());
+		bullet->GetComponent<yev::TransformComponent>()->SetLocalPosition(startPosition.x, startPosition.y, 0);
+		bullet->AddComponent<yev::RenderComponent>(bullet.get());
+		bullet->GetComponent<yev::RenderComponent>()->SetTexture("PLayerBullet.png");
+		bullet->AddComponent<BulletComponent>(bullet.get());
 
 		const auto& scene = yev::SceneManager::GetInstance().GetScene("Main");
 
-		scene->Add(std::move(m_pBullet));
+		m_pBullet = bullet.get();
+
+		scene->Add(std::move(bullet));
 	}
 
 	Bullet()
-		: Bullet( glm::vec3(0,0,0) , glm::vec3(0,0,0))
-	{
-
-	}
+		: Bullet( glm::vec3(0,0,0))
+	{}
 
 	// Destructor
 	~Bullet() = default;
@@ -44,24 +46,20 @@ public:
 
 	void SetPosition(const glm::vec3& position) 
 	{
+		std::cout << "Position set to:" + std::to_string(position.x) + "," + std::to_string(position.y);
 		m_pBullet->GetComponent<yev::TransformComponent>()->SetLocalPosition(position.x, position.y, 0);
 	}
 	void SetDirection(const glm::vec3& direction)
 	{
-		m_Direction = direction;
+		m_pBullet->GetComponent<BulletComponent>()->SetDirection(direction);
+		m_pBullet->GetComponent<BulletComponent>()->SetSpeed(5);
 	}
 
-	void Move()
-	{
-		//glm::vec3 offset
-		m_pBullet->GetComponent<yev::TransformComponent>()->Translate(m_Direction);
-	}
 
 private:
-	std::unique_ptr<yev::GameObject> m_pBullet;
+	yev::GameObject* m_pBullet;
 
 
-	glm::vec3 m_Direction;
 };
 
 #endif

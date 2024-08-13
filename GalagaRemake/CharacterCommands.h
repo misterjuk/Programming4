@@ -98,16 +98,18 @@ namespace yev {
     class ShootCommand : public Command
     {
     public:
-        ShootCommand(GameObject* character, BulletPool* bulletPool) : m_Character(character), m_BulletPool{ bulletPool } {}
+        ShootCommand(GameObject* character) : m_Character(character) {} 
+
 
         void Execute() override
         {
             glm::vec3 position = m_Character->GetComponent<TransformComponent>()->GetWorldPosition();
-            m_BulletPool->getBullet(position.x , position.y, 0, 10);
+
+            BulletPool& pool = BulletPool::GetInstance();
+            pool.getBullet(position.x , position.y, 0, -1);
         }
 
     private:
         GameObject* m_Character;
-        BulletPool* m_BulletPool;
     };
 }
