@@ -21,7 +21,7 @@ public:
 	Bullet(const glm::vec3& startPosition);
 
 	Bullet()
-		: Bullet(glm::vec3(0,0,0))
+		: Bullet(glm::vec3(0,-20,0))
 	{}
 
 	// Destructor

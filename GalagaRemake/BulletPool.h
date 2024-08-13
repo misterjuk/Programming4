@@ -72,6 +72,10 @@ public:
             auto it = std::remove(activeBullets.begin(), activeBullets.end(), bullet);
             activeBullets.erase(it, activeBullets.end());
 
+
+            bullet->SetPosition(glm::vec3(0, -20, 0));
+
+            bullet->SetDirection(glm::vec3(0, 0, 0));
             // Add the bullet back to the pool
             availableBullets.push(bullet);
         }

@@ -51,8 +51,15 @@ namespace yev {
 
         void Execute() override
         {
+
+            if (yev::SceneManager::GetInstance().GetCurrentSceneName() != "Main")
+
+                return;
+
             if (m_Character->HasComponent<TransformComponent>())
             {
+                glm::vec3 pos = m_Character->GetComponent<TransformComponent>()->GetWorldPosition();
+                if (pos.x >= 20)
                 m_Character->GetComponent<TransformComponent>()->Translate(glm::vec3(-200.0f * GameTime::GetInstance().GetDeltaTime(), 0.0f, 0.0f));
             }
         }
@@ -68,8 +75,14 @@ namespace yev {
 
         void Execute() override
         {
+
+            if (yev::SceneManager::GetInstance().GetCurrentSceneName() != "Main")
+                return;
+
             if (m_Character->HasComponent<TransformComponent>())
             {
+                glm::vec3 pos = m_Character->GetComponent<TransformComponent>()->GetWorldPosition();
+                if(pos.x <= 600)
                 m_Character->GetComponent<TransformComponent>()->Translate(glm::vec3(200.0f*GameTime::GetInstance().GetDeltaTime(), 0.0f, 0.0f));
             }
         }
@@ -85,6 +98,9 @@ namespace yev {
 
         void Execute() override
         {
+            if (yev::SceneManager::GetInstance().GetCurrentSceneName() != "Main")
+                return;
+
             if (m_Character->HasComponent<HealthComponent>())
             {
                 m_Character->GetComponent<HealthComponent>()->Notify(GameEvents::PlayerDamaged, m_Character);
@@ -105,6 +121,10 @@ namespace yev {
 
         void Execute() override
         {
+
+            if (yev::SceneManager::GetInstance().GetCurrentSceneName() != "Main")
+                return;
+
             glm::vec3 position = m_Character->GetComponent<TransformComponent>()->GetWorldPosition();
 
             BulletPool& pool = BulletPool::GetInstance();
