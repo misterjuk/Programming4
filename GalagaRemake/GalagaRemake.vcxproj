@@ -158,6 +158,7 @@
     <ClInclude Include="BulletComponent.h" />
     <ClInclude Include="BulletPool.h" />
     <ClInclude Include="CharacterCommands.h" />
+    <ClInclude Include="GameCommands.h" />
     <ClInclude Include="HealthComponent.h" />
     <ClInclude Include="ScoreComponent.h" />
   </ItemGroup>

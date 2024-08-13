@@ -14,6 +14,8 @@ namespace yev
 		void CreateScene(const std::string& name);
 		void SetScene(const std::string& name);
 		Scene* GetScene(const std::string& name) const;
+		const std::string GetCurrentSceneName() const;
+
 
 		void Update();
 		void Render();

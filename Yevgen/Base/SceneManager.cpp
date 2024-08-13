@@ -33,3 +33,8 @@ yev::Scene* yev::SceneManager::GetScene(const std::string& name) const
 
 	return nullptr; 
 }
+
+const std::string yev::SceneManager::GetCurrentSceneName() const
+{
+	return m_CurrentScene->GetName();
+}
