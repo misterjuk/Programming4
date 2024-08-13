@@ -85,11 +85,11 @@ private:
     EnemyManager(const std::string& dataPath) : m_DataPath{ dataPath } {}
 
     // Default constructor with default data path
-    EnemyManager() : m_DataPath{ "../Data/" } {}
+    EnemyManager() : m_DataPath{ "Data/" } {}
 
 
     std::vector<Enemy*> m_Enemies;
-    const std::string m_DataPath{ "../Data/" };
+    const std::string m_DataPath{ "Data/" };
 };
 
 #endif
