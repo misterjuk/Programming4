@@ -7,12 +7,20 @@
 #include "RenderComponent.h"
 #include "SceneManager.h"
 #include <iostream>
+
+enum class EnemyType {
+	Bee,
+	Butterfly,
+	Boss
+};
+
 class Enemy
 {
 
 public:
 
-	Enemy(const glm::vec3& startPosition)
+	Enemy(const glm::vec3& startPosition, EnemyType type)
+		: m_Type{type}
 	{
 		std::unique_ptr<yev::GameObject> enemy = std::make_unique<yev::GameObject>();
 
@@ -29,7 +37,7 @@ public:
 	}
 
 	Enemy()
-		: Enemy(glm::vec3(0, 0, 0))
+		: Enemy(glm::vec3(0, 0, 0), EnemyType::Bee)
 	{}
 
 	// Destructor
@@ -42,7 +50,9 @@ public:
 
 
 private:
-	yev::GameObject* m_pEnemy;
+	yev::GameObject* m_pEnemy{nullptr};
+
+	EnemyType m_Type{ EnemyType::Bee };
 };
 
 #endif
