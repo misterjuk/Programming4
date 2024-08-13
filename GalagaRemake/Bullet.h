@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "TransformComponent.h"
 #include "RenderComponent.h"
+#include "SceneManager.h"
 class Bullet
 {
 
@@ -20,7 +21,11 @@ public:
 		m_pBullet->AddComponent<yev::TransformComponent>(m_pBullet.get());
 		m_pBullet->GetComponent<yev::TransformComponent>()->SetLocalPosition(startPosition.x, startPosition.y, 0);
 		m_pBullet->AddComponent<yev::RenderComponent>(m_pBullet.get());
-		m_pBullet->GetComponent<yev::RenderComponent>()->SetTexture("Ship.png");
+		m_pBullet->GetComponent<yev::RenderComponent>()->SetTexture("PLayerBullet.png");
+
+		const auto& scene = yev::SceneManager::GetInstance().GetScene("Main");
+
+		scene->Add(std::move(m_pBullet));
 	}
 
 	Bullet()

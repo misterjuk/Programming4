@@ -8,6 +8,9 @@ yev::GameObject::~GameObject() = default;
 
 void yev::GameObject::Update() 
 {
+
+    if (!m_isActive) return;
+
     for (const auto& component : m_Components)
     {
         component->Update();
@@ -16,6 +19,8 @@ void yev::GameObject::Update()
 
 void yev::GameObject::Render() const
 {
+   if (!m_isActive) return;
+
    for (const auto& component : m_Components)
    {    
        component->Render();      

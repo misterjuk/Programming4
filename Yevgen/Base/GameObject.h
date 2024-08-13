@@ -98,7 +98,9 @@ namespace yev
 
         void SetParent(GameObject* parent, bool keepWorldPosition);
 
-        GameObject* GetParent() const { return m_Parent; };
+            GameObject* GetParent() const { return m_Parent; };
+
+            void SetIsActive(bool isActive) { m_isActive = isActive; };
 
     private:
         std::vector<std::unique_ptr<Component>> m_Components;
@@ -106,6 +108,8 @@ namespace yev
         GameObject* m_Parent;
 
         std::vector<std::unique_ptr<GameObject>> m_Children;
+
+        bool m_isActive;
 
         bool IsChild(GameObject* childToCheck) const;
         void AddChild(GameObject* child);

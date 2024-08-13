@@ -17,7 +17,7 @@ public:
         // Pre-allocate bullets and store them in the pool
         for (std::size_t i = 0; i < size; ++i)
         {
-            bullets.push_back(std::make_unique<Bullet>());
+            bullets.emplace_back(std::make_unique<Bullet>());
             availableBullets.push(bullets.back().get());
         }
     }
@@ -43,13 +43,13 @@ public:
         availableBullets.pop();
 
         // Set the initial position and direction for the bullet
-       // bullet->SetPosition(glm::vec3(startX, startY, 0));
-        //bullet->SetDirection(glm::vec3(dx, dy, 0));
+        bullet->SetPosition(glm::vec3(startX, startY, 0));
+        bullet->SetDirection(glm::vec3(dx, dy, 0));
 
         // Track this bullet as active
-        activeBullets.push_back(bullet);
+        activeBullets.emplace_back(bullet);
 
-        // Transfer ownership of the bullet to the caller
+        // Create a unique_ptr for the bullet to return
         return std::unique_ptr<Bullet>(bullet);
     }
 
@@ -60,18 +60,11 @@ public:
         auto it = std::remove(activeBullets.begin(), activeBullets.end(), bullet.get());
         activeBullets.erase(it, activeBullets.end());
 
-        // Return the bullet to the pool
+        // Add the bullet back to the pool
         availableBullets.push(bullet.release());
     }
 
-    // Move all active bullets
-    void moveBullets()
-    {
-        for (auto* bullet : activeBullets)
-        {
-           // bullet->Move();
-        }
-    }
+
 
 private:
     std::vector<std::unique_ptr<Bullet>> bullets;      // Storage for all bullets
